@@ -1,10 +1,10 @@
-package pl.itembase.demo.thing;
+package pl.itembase.demo.item;
 
 import jakarta.persistence.*;
 import pl.itembase.demo.room.Room;
 
 @Entity
-public class Thing {
+public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +15,7 @@ public class Thing {
     @JoinColumn(name = "room_id")
     private Room room;
 
-    public Thing() {
+    public Item() {
 
     }
 

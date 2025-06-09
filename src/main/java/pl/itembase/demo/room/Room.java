@@ -1,7 +1,7 @@
 package pl.itembase.demo.room;
 
 import jakarta.persistence.*;
-import pl.itembase.demo.thing.Thing;
+import pl.itembase.demo.item.Item;
 import pl.itembase.demo.user.User;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class Room {
     private User user;
 
     @OneToMany(mappedBy = "room")
-     List<Thing> things;
+     List<Item> items;
 
 
     public Room() {
