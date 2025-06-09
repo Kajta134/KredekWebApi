@@ -2,7 +2,7 @@ package pl.itembase.demo.item;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.itembase.demo.exception.ThingNotFoundException;
+import pl.itembase.demo.exception.ItemNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +40,7 @@ public class ItemService {
 
     public ItemDTO getThing(Long id) {
         Item item = itemRepository.findById(id)
-                .orElseThrow(() -> new ThingNotFoundException("Thing with id " + id + " not found"));
+                .orElseThrow(() -> new ItemNotFoundException("Thing with id " + id + " not found"));
 
         return itemDTOMapper.apply(item);
     }
@@ -56,7 +56,7 @@ public class ItemService {
                     item.setName(item.getName());
                     item.setRoom(item.getRoom());
                     return itemDTOMapper.apply(itemRepository.save(item));
-                }).orElseThrow(() -> new ThingNotFoundException("Thing with id " + id + " not found"));
+                }).orElseThrow(() -> new ItemNotFoundException("Thing with id " + id + " not found"));
     }
 
     public ItemDTO patchThing(Long id, Item item) {
@@ -65,14 +65,14 @@ public class ItemService {
                     if (item.getName() != null) item.setName(item.getName());
                     if (item.getRoom() != null) item.setRoom(item.getRoom());
                     return itemDTOMapper.apply(itemRepository.save(item));
-                }).orElseThrow(() -> new ThingNotFoundException("Thing with id " + id + " not found"));
+                }).orElseThrow(() -> new ItemNotFoundException("Thing with id " + id + " not found"));
     }
 
     public void deleteThing(Long id) {
         if (itemRepository.findById(id).isPresent()) {
             itemRepository.deleteById(id);
         }else{
-            throw new ThingNotFoundException("Thing with id " + id + " not found");
+            throw new ItemNotFoundException("Thing with id " + id + " not found");
         }
     }
 }
